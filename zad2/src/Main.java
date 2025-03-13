@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -8,20 +7,27 @@ public class Main {
         int wiek = sc.nextInt();
         System.out.println("Gdzie mieszkasz?");
         String miasto = sc.next();
-        System.out.println("Kiedy kupiłeś bilet?");
+        System.out.println("Kiedy kupiłeś bilet (Podaj dzień tygodnia)?");
         String dzień = sc.next();
 
-        int cena = 40;
-        if (wiek > 10) {
-             cena = 0;
-        } else if (wiek < 10 && wiek > 18) {
-            cena = cena/2;
+        double cena = 40;
+        double znizka = 0;
+        if (wiek < 10) {
+            znizka = 1.0;
+        } else if (wiek > 10 && wiek < 18) {
+            znizka += 0.5;
         }
-        if (miasto == "Warszawa" && miasto == "warszawa") {
-            cena = cena - (1 / 10);
+        if (miasto.equals("Warszawa") || miasto.equals("warszawa")) {
+            znizka += 0.1;
         }
-        if(dzień == "Czwartek" && miasto == "czwartek") {
-            cena = 0;
+        if(dzień.equals("Czwartek") || dzień.equals("czwartek")) {
+            znizka = 1.0;
         }
+        cena *= (1 - znizka);
+        System.out.print("Data: ");
+        System.out.print(miasto);
+        System.out.print(", Wiek: " + wiek);
+        System.out.printf(", Cena: " + cena);
+        System.out.printf(", Znizka: " + znizka *100);
     }
 }
